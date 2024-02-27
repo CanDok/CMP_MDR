@@ -56,7 +56,6 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t tx_buff[]={'H','e','l','l','o',13,10};
 uint8_t SB[] = {13,10};
 uint8_t S1[] = {"CCW SET!"};
 uint8_t S2[] = {"CW SET!"};
@@ -122,6 +121,14 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_UART_Receive_IT(&huart1, rx_buff, 11);
   HAL_GPIO_WritePin(EN_GPIO_Port,EN_Pin, GPIO_PIN_SET);
+  HAL_UART_Transmit(&huart1, S17, 11, 1000);
+  		  HAL_UART_Transmit(&huart1, SB, 2, 1000);
+  		  HAL_UART_Transmit(&huart1, S18, 31, 1000);
+  		  HAL_UART_Transmit(&huart1, SB, 2, 1000);
+  		  HAL_UART_Transmit(&huart1, S19, 10, 1000);
+  		  HAL_UART_Transmit(&huart1, SB, 2, 1000);
+  		  HAL_UART_Transmit(&huart1, S20, 12, 1000);
+  	 	 HAL_UART_Transmit(&huart1, SB, 2, 1000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -131,6 +138,7 @@ int main(void)
     /* USER CODE END WHILE */
 
 	  if((rx_buff[0]=='C')&(rx_buff[1]=='T')&(rx_buff[2]=='R')&(rx_buff[3]=='I')&(rx_buff[4]=='D')&(rx_buff[5]=='N')&(rx_buff[6]=='/')&(rx_buff[7]=='*')&(rx_buff[8]=='?')){
+		  HAL_Delay(100);
 		  HAL_UART_Transmit(&huart1, S17, 11, 1000);
 		  HAL_UART_Transmit(&huart1, SB, 2, 1000);
 		  HAL_UART_Transmit(&huart1, S18, 31, 1000);
@@ -170,6 +178,7 @@ int main(void)
 
 	  if((rx_buff[0]=='S')&(rx_buff[1]=='S')&(rx_buff[2]=='M')&(rx_buff[3]=='C')&(rx_buff[4]=='H')&(rx_buff[5]=='K')&(rx_buff[6]=='L')&(rx_buff[7]=='S')&(rx_buff[8]=='1')){
 		  itoa (lim1,sst,10);
+		  HAL_Delay(100);
 HAL_UART_Transmit(&huart1, sst, 1, 1000);
 HAL_UART_Transmit(&huart1, SB, 2, 1000);
 	 	  	       rx_buff[0]='x';
@@ -187,6 +196,7 @@ HAL_UART_Transmit(&huart1, SB, 2, 1000);
 
 	  if((rx_buff[0]=='S')&(rx_buff[1]=='S')&(rx_buff[2]=='M')&(rx_buff[3]=='C')&(rx_buff[4]=='H')&(rx_buff[5]=='K')&(rx_buff[6]=='L')&(rx_buff[7]=='S')&(rx_buff[8]=='2')){
 		  itoa (lim2,sst,10);
+		  HAL_Delay(100);
 		  HAL_UART_Transmit(&huart1, sst, 1, 1000);
 		  HAL_UART_Transmit(&huart1, SB, 2, 1000);
 	 	  	       rx_buff[0]='x';
@@ -247,6 +257,7 @@ if(HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_11)){
 
 
 	  	 if((rx_buff[0]=='S')&(rx_buff[1]=='E')&(rx_buff[2]=='T')&(rx_buff[3]=='S')&(rx_buff[4]=='P')){
+	  		HAL_Delay(100);
 	  		HAL_UART_Transmit(&huart1, S11, 9, 1000);
 	  		HAL_UART_Transmit(&huart1, SB, 2, 1000);
 	  	 	char sayi= rx_buff[5];
@@ -277,6 +288,7 @@ if(HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_11)){
 
 
 	  	 if((rx_buff[0]=='S')&(rx_buff[1]=='E')&(rx_buff[2]=='T')&(rx_buff[3]=='D')&(rx_buff[4]=='L')){
+	  		 HAL_Delay(100);
 	  	 	HAL_UART_Transmit(&huart1, S10, 10, 1000);
 	  	 	HAL_UART_Transmit(&huart1, SB, 2, 1000);
 
@@ -309,6 +321,7 @@ if(HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_11)){
 
 	  	 if((rx_buff[0]=='S')&(rx_buff[1]=='S')&(rx_buff[2]=='M')&(rx_buff[3]=='S')&(rx_buff[4]=='E')&(rx_buff[5]=='T')&(rx_buff[6]=='D')&(rx_buff[7]=='R')&(rx_buff[8]=='-')){
 	  	 	HAL_GPIO_WritePin(DIR_GPIO_Port,DIR_Pin, GPIO_PIN_SET);
+	  	 	HAL_Delay(100);
 	  	 	HAL_UART_Transmit(&huart1, S2, 7, 1000);
 	  	 	HAL_UART_Transmit(&huart1, SB, 2, 1000);
 	  		parity=0;
@@ -325,6 +338,7 @@ if(HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_11)){
 
 	  	 if((rx_buff[0]=='S')&(rx_buff[1]=='S')&(rx_buff[2]=='M')&(rx_buff[3]=='S')&(rx_buff[4]=='E')&(rx_buff[5]=='T')&(rx_buff[6]=='D')&(rx_buff[7]=='R')&(rx_buff[8]=='+')){
 	  		 HAL_GPIO_WritePin(DIR_GPIO_Port,DIR_Pin, GPIO_PIN_RESET);
+	  		HAL_Delay(100);
 	  	 	HAL_UART_Transmit(&huart1, S1, 8, 1000);
 	  	 	HAL_UART_Transmit(&huart1, SB, 2, 1000);
 	  	 	parity=1;
@@ -346,6 +360,7 @@ if(HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_11)){
 
 	  	 if((rx_buff[0]=='S')&(rx_buff[1]=='S')&(rx_buff[2]=='M')&(rx_buff[3]=='S')&(rx_buff[4]=='E')&(rx_buff[5]=='T')&(rx_buff[6]=='A')&(rx_buff[7]=='R')&(rx_buff[8]=='M')){
 	  			 HAL_GPIO_WritePin(EN_GPIO_Port,EN_Pin, GPIO_PIN_RESET);
+	  			HAL_Delay(100);
 	  		 	HAL_UART_Transmit(&huart1, S3, 6, 1000);
 	  		 	HAL_UART_Transmit(&huart1, SB, 2, 1000);
 	  		  rx_buff[0]='x';
@@ -362,6 +377,7 @@ if(HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_11)){
 
 	  	 if((rx_buff[0]=='S')&(rx_buff[1]=='S')&(rx_buff[2]=='M')&(rx_buff[3]=='S')&(rx_buff[4]=='E')&(rx_buff[5]=='T')&(rx_buff[6]=='D')&(rx_buff[7]=='I')&(rx_buff[8]=='S')){
 	  			 HAL_GPIO_WritePin(EN_GPIO_Port,EN_Pin, GPIO_PIN_SET);
+	  			HAL_Delay(100);
 	  		 	HAL_UART_Transmit(&huart1, S4, 9, 1000);
 	  		 	HAL_UART_Transmit(&huart1, SB, 2, 1000);
 	  		  rx_buff[0]='x';
